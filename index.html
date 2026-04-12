@@ -1,8 +1,586 @@
 <!DOCTYPE html>
-<html>
-<head><title>Megha Jain</title></head>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Megha Shanthraj — AI/ML Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --bg-card: #12121a;
+    --bg-card-hover: #1a1a27;
+    --text: #e8e6e3;
+    --text-muted: #8a8694;
+    --accent: #6ee7b7;
+    --accent-dim: rgba(110, 231, 183, 0.12);
+    --accent2: #818cf8;
+    --accent2-dim: rgba(129, 140, 248, 0.12);
+    --border: rgba(255,255,255,0.06);
+    --radius: 16px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* Grain overlay */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    z-index: 9999;
+  }
+
+  /* Ambient glow */
+  .glow {
+    position: fixed;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.07;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .glow-1 { background: var(--accent); top: -200px; left: -100px; }
+  .glow-2 { background: var(--accent2); bottom: -200px; right: -100px; }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── NAV ── */
+  nav {
+    padding: 28px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    animation: fadeDown 0.8s ease both;
+  }
+  .logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem;
+    color: var(--accent);
+    letter-spacing: -0.5px;
+  }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 100px 0 80px;
+    text-align: center;
+    animation: fadeUp 1s ease both;
+  }
+  .hero-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    background: var(--accent-dim);
+    color: var(--accent);
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.8rem, 6vw, 4.5rem);
+    line-height: 1.1;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, var(--text) 40%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero p {
+    font-size: 1.15rem;
+    color: var(--text-muted);
+    max-width: 620px;
+    margin: 0 auto 36px;
+    font-weight: 300;
+  }
+  .hero-links { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .hero-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: var(--bg);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(110,231,183,0.25); }
+  .btn-secondary {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* ── SECTION HEADINGS ── */
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem;
+    margin-bottom: 8px;
+    animation: fadeUp 0.8s ease both;
+  }
+  .section-sub {
+    color: var(--text-muted);
+    font-size: 1rem;
+    margin-bottom: 48px;
+    font-weight: 300;
+    animation: fadeUp 0.8s ease both;
+    animation-delay: 0.1s;
+  }
+
+  /* ── PROJECT GRID ── */
+  #projects { padding: 60px 0 80px; }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+  }
+  .project-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    animation: fadeUp 0.6s ease both;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+  .project-card:hover {
+    background: var(--bg-card-hover);
+    border-color: rgba(110,231,183,0.15);
+    transform: translateY(-4px);
+  }
+  .project-card:hover::before { opacity: 1; }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 14px;
+  }
+  .card-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+  }
+  .card-arrow {
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    transition: all 0.3s;
+  }
+  .project-card:hover .card-arrow { color: var(--accent); transform: translate(3px, -3px); }
+
+  .project-card h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .project-card p {
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    line-height: 1.55;
+    margin-bottom: 18px;
+    font-weight: 300;
+  }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag {
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.72rem;
+    font-weight: 500;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .tag-green { background: var(--accent-dim); color: var(--accent); }
+  .tag-purple { background: var(--accent2-dim); color: var(--accent2); }
+  .tag-neutral { background: rgba(255,255,255,0.05); color: var(--text-muted); }
+
+  /* ── ABOUT ── */
+  #about { padding: 60px 0 80px; }
+  .about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    animation: fadeUp 0.8s ease both;
+  }
+  .about-text p {
+    color: var(--text-muted);
+    font-size: 1rem;
+    margin-bottom: 16px;
+    font-weight: 300;
+    line-height: 1.75;
+  }
+  .stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .stat {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+  }
+  .stat-number {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem;
+    color: var(--accent);
+  }
+  .stat-label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+
+  /* ── CONTACT ── */
+  #contact {
+    padding: 80px 0;
+    text-align: center;
+  }
+  .contact-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 56px 40px;
+    max-width: 600px;
+    margin: 0 auto;
+    animation: fadeUp 0.8s ease both;
+  }
+  .contact-card h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.8rem;
+    margin-bottom: 12px;
+  }
+  .contact-card p {
+    color: var(--text-muted);
+    margin-bottom: 28px;
+    font-weight: 300;
+  }
+  .contact-links { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .contact-links a {
+    padding: 10px 20px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 500;
+    transition: all 0.3s;
+  }
+  .contact-links a:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 40px 0;
+    text-align: center;
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 0.82rem;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .projects-grid .project-card:nth-child(1) { animation-delay: 0.05s; }
+  .projects-grid .project-card:nth-child(2) { animation-delay: 0.1s; }
+  .projects-grid .project-card:nth-child(3) { animation-delay: 0.15s; }
+  .projects-grid .project-card:nth-child(4) { animation-delay: 0.2s; }
+  .projects-grid .project-card:nth-child(5) { animation-delay: 0.25s; }
+  .projects-grid .project-card:nth-child(6) { animation-delay: 0.3s; }
+  .projects-grid .project-card:nth-child(7) { animation-delay: 0.35s; }
+  .projects-grid .project-card:nth-child(8) { animation-delay: 0.4s; }
+  .projects-grid .project-card:nth-child(9) { animation-delay: 0.45s; }
+  .projects-grid .project-card:nth-child(10) { animation-delay: 0.5s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .about-content { grid-template-columns: 1fr; }
+    .hero { padding: 60px 0 50px; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .nav-links { gap: 16px; }
+  }
+</style>
+</head>
 <body>
-  <h1>Hello! I'm Megha.</h1>
-  <p>Portfolio coming soon.</p>
+
+<div class="glow glow-1"></div>
+<div class="glow glow-2"></div>
+
+<div class="container">
+
+  <!-- NAV -->
+  <nav>
+    <div class="logo">MJ</div>
+    <div class="nav-links">
+      <a href="#projects">Projects</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-badge">AI / ML Engineer</div>
+    <h1>Megha Shanthraj</h1>
+    <p>Senior Software Engineering Lead building intelligent systems — from multi-agent orchestration to satellite imagery pipelines. 20+ years shipping production software.</p>
+    <div class="hero-links">
+      <a href="#projects" class="btn-primary">View Projects ↓</a>
+      <a href="https://linkedin.com/in/megha-s15" target="_blank" class="btn-secondary">LinkedIn →</a>
+      <a href="https://github.com/meghamegs-lab" target="_blank" class="btn-secondary">GitHub →</a>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <h2 class="section-title">Projects</h2>
+    <p class="section-sub">A selection of AI/ML systems, tools, and applications</p>
+
+    <div class="projects-grid">
+
+      <!-- Agent Fortio -->
+      <a class="project-card" href="https://github.com/meghamegs-lab/agent-fortio" target="_blank">
+        <div class="card-header">
+          <div class="card-icon" style="background:var(--accent-dim);">📊</div>
+          <span class="card-arrow">↗</span>
+        </div>
+        <h3>Agent Fortio</h3>
+        <p>LangGraph-powered portfolio intelligence agent with MCP integration. Provides real-time analysis, risk monitoring, and rebalancing recommendations.</p>
+        <div class="tags">
+          <span class="tag tag-green">LangGraph</span>
+          <span class="tag tag-purple">MCP</span>
+          <span class="tag tag-neutral">Python</span>
+        </div>
+      </a>
+
+      <!-- ChatBridge -->
+      <a class="project-card" href="https://github.com/meghamegs-lab/chatbridge" target="_blank">
+        <div class="card-header">
+          <div class="card-icon" style="background:var(--accent2-dim);">💬</div>
+          <span class="card-arrow">↗</span>
+        </div>
+        <h3>ChatBridge</h3>
+        <p>AI chat platform with a plugin architecture supporting multiple LLM providers. Features local model fallback via Ollama with quantization support.</p>
+        <div class="tags">
+          <span class="tag tag-green">LLM</span>
+          <span class="tag tag-purple">Ollama</span>
+          <span class="tag tag-neutral">Plugin System</span>
+        </div>
+      </a>
+
+      <!-- AgentRelay / Yuno -->
+      <a class="project-card" href="https://github.com/meghamegs-lab/agentrelay-yuno" target="_blank">
+        <div class="card-header">
+          <div class="card-icon" style="background:var(--accent-dim);">🔀</div>
+          <span class="card-arrow">↗</span>
+        </div>
+        <h3>AgentRelay / Yuno</h3>
+        <p>Multi-agent orchestration platform with a visual workflow builder. Design, deploy, and monitor complex agent pipelines in a drag-and-drop interface.</p>
+        <div class="tags">
+          <span class="tag tag-green">Multi-Agent</span>
+          <span class="tag tag-purple">Orchestration</span>
+          <span class="tag tag-neutral">React</span>
+        </div>
+      </a>
+
+      <!-- SkyFi MCP Server -->
+      <a class="project-card" href="https://github.com/meghamegs-lab/skyfi-mcp-server" target="_blank">
+        <div class="card-header">
+          <div class="card-icon" style="background:var(--accent2-dim);">🛰️</div>
+          <span class="card-arrow">↗</span>
+        </div>
+        <h3>SkyFi MCP Server</h3>
+        <p>MCP server for satellite imagery access via SkyFi, deployed on Cloudflare Workers. Search, preview, order, and monitor satellite data through natural language.</p>
+        <div class="tags">
+          <span class="tag tag-green">MCP</span>
+          <span class="tag tag-purple">Cloudflare</span>
+          <span class="tag tag-neutral">Satellite</span>
+        </div>
+      </a>
+
+      <!-- LegacyLens -->
+      <a class="project-card" href="https://github.com/meghamegs-lab/legacylens" target="_blank">
+        <div class="card-header">
+          <div class="card-icon" style="background:var(--accent-dim);">🔍</div>
+          <span class="card-arrow">↗</span>
+        </div>
+        <h3>LegacyLens</h3>
+        <p>RAG pipeline for navigating and understanding legacy codebases. Ingests, indexes, and answers questions about large unfamiliar code repositories.</p>
+        <div class="tags">
+          <span class="tag tag-green">RAG</span>
+          <span class="tag tag-purple">Embeddings</span>
+          <span class="tag tag-neutral">Python</span>
+        </div>
+      </a>
+
+      <!-- MedBridge AI Coach -->
+      <a class="project-card" href="https://github.com/meghamegs-lab/medbridge-ai-coach" target="_blank">
+        <div class="card-header">
+          <div class="card-icon" style="background:var(--accent2-dim);">🏥</div>
+          <span class="card-arrow">↗</span>
+        </div>
+        <h3>MedBridge AI Coach</h3>
+        <p>LangGraph-based healthcare exercise accountability coach. Guides patients through personalized rehab routines with adaptive check-ins.</p>
+        <div class="tags">
+          <span class="tag tag-green">LangGraph</span>
+          <span class="tag tag-purple">Healthcare</span>
+          <span class="tag tag-neutral">AI Coach</span>
+        </div>
+      </a>
+
+      <!-- Nerdy AI Video Tutor -->
+      <a class="project-card" href="https://github.com/meghamegs-lab/nerdy-ai-tutor" target="_blank">
+        <div class="card-header">
+          <div class="card-icon" style="background:var(--accent-dim);">🎓</div>
+          <span class="card-arrow">↗</span>
+        </div>
+        <h3>Nerdy AI Video Tutor</h3>
+        <p>Real-time Socratic tutoring avatar that adapts to student understanding. Delivers interactive video-based lessons with follow-up questioning.</p>
+        <div class="tags">
+          <span class="tag tag-green">AI Tutor</span>
+          <span class="tag tag-purple">Real-time</span>
+          <span class="tag tag-neutral">EdTech</span>
+        </div>
+      </a>
+
+      <!-- Nerdy Ad System -->
+      <a class="project-card" href="https://github.com/meghamegs-lab/nerdy-ad-system" target="_blank">
+        <div class="card-header">
+          <div class="card-icon" style="background:var(--accent2-dim);">📢</div>
+          <span class="card-arrow">↗</span>
+        </div>
+        <h3>Nerdy Ad System</h3>
+        <p>LLM-as-judge ad copy pipeline that generates, evaluates, and ranks advertising content using multi-model consensus scoring.</p>
+        <div class="tags">
+          <span class="tag tag-green">LLM</span>
+          <span class="tag tag-purple">Ad Tech</span>
+          <span class="tag tag-neutral">Pipeline</span>
+        </div>
+      </a>
+
+      <!-- ZapPulse -->
+      <a class="project-card" href="https://github.com/meghamegs-lab/zappulse" target="_blank">
+        <div class="card-header">
+          <div class="card-icon" style="background:var(--accent-dim);">⚡</div>
+          <span class="card-arrow">↗</span>
+        </div>
+        <h3>ZapPulse</h3>
+        <p>High-throughput event ingestion API built for a Zapier partner challenge. Handles real-time webhook streams with schema validation and routing.</p>
+        <div class="tags">
+          <span class="tag tag-green">API</span>
+          <span class="tag tag-purple">Events</span>
+          <span class="tag tag-neutral">Webhooks</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <h2 class="section-title">About</h2>
+    <p class="section-sub">Engineer, builder, lifelong learner</p>
+    <div class="about-content">
+      <div class="about-text">
+        <p>I'm a Senior Software Engineering Lead with 20+ years of experience shipping production systems. My current focus is on AI/ML engineering — multi-agent systems, LLM application development, and building tools that make complex technology accessible.</p>
+        <p>I'm a participant in the Gauntlet AI training program and hold consultant roles at UCLA. I'm passionate about applying AI to high-impact verticals: healthcare, education, legal, and government.</p>
+        <p>I believe the best software is built at the intersection of deep technical skill and genuine empathy for the end user.</p>
+      </div>
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="stat-number">20+</div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">9</div>
+          <div class="stat-label">AI/ML Projects</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">5+</div>
+          <div class="stat-label">LLM Frameworks</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">∞</div>
+          <div class="stat-label">Curiosity</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-card">
+      <h2>Let's Build Something</h2>
+      <p>Open to collaborations, consulting, and interesting conversations about AI.</p>
+      <div class="contact-links">
+        <a href="https://linkedin.com/in/megha-s15" target="_blank">LinkedIn</a>
+        <a href="https://github.com/meghamegs-lab" target="_blank">GitHub</a>
+        <a href="mailto:hello@meghasjain15.com">Email</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Megha Shanthraj · Built with craft & curiosity</p>
+  </footer>
+
+</div>
+
 </body>
 </html>
+
