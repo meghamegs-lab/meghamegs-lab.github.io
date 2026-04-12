@@ -1021,7 +1021,7 @@ footer strong { color: var(--accent); font-weight: 700; }
       <div class="tl-dot"></div>
       <div class="tl-date">Feb 2026 — Present</div>
       <div class="tl-role">AI Software Engineer — Intensive Training Program</div>
-      
+      <div class="tl-company">Gauntlet AI · Austin, TX</div>
       <div class="tl-desc">Building production-grade AI applications across multi-agent systems, RAG, real-time AI, and agentic architectures.</div>
       <ul class="tl-bullets">
         <li>Shipped 9+ AI/ML projects spanning finance, healthcare, education, ad tech, and developer tooling</li>
@@ -1192,4 +1192,11 @@ function toggleTheme() {
 })();
 
 // Scroll reveal
-const observer = 
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.anim').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
