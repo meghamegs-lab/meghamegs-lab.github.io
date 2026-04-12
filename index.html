@@ -526,6 +526,44 @@ section { padding: 80px 0; }
   color: var(--text-muted);
   line-height: 1.65;
 }
+.tl-bullets {
+  margin-top: 10px;
+  padding-left: 18px;
+  list-style: none;
+}
+.tl-bullets li {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 6px;
+  position: relative;
+  padding-left: 14px;
+}
+.tl-bullets li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.tl-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 12px;
+}
+.tl-tech span {
+  padding: 3px 9px;
+  border-radius: 6px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  font-family: 'JetBrains Mono', monospace;
+  background: var(--accent-light);
+  color: var(--accent);
+}
 
 /* ═══════════════════════════════════════════
    CONTACT
@@ -706,9 +744,7 @@ footer strong { color: var(--accent); font-weight: 700; }
       <a href="#projects" class="btn-fill">View Projects ↓</a>
       <a href="https://linkedin.com/in/megha-s15" target="_blank" class="btn-outline">LinkedIn</a>
       <a href="https://github.com/meghamegs-lab" target="_blank" class="btn-outline">GitHub</a>
-      <!-- Uncomment when you add a resume PDF to your repo:
       <a href="./Megha_Shanthraj_Resume.pdf" target="_blank" class="btn-outline">📄 Resume</a>
-      -->
     </div>
   </div>
   <div class="hero-photo">
@@ -983,36 +1019,110 @@ footer strong { color: var(--accent); font-weight: 700; }
 
     <div class="tl-item">
       <div class="tl-dot"></div>
-      <div class="tl-date"> Feb 2026 — Present</div>
-      <div class="tl-role">AI Engineering Fellow</div>
-      <div class="tl-company">Gauntlet AI · Austin, TX</div>
-      <div class="tl-desc">Highly selective AI training fellowship. Building production-grade multi-agent systems, LLM applications, and MCP integrations. Shipping 9+ AI/ML projects across healthcare, finance, education, and developer tooling.</div>
+      <div class="tl-date">Feb 2026 — Present</div>
+      <div class="tl-role">AI Software Engineer — Intensive Training Program</div>
+      
+      <div class="tl-desc">Building production-grade AI applications across multi-agent systems, RAG, real-time AI, and agentic architectures.</div>
+      <ul class="tl-bullets">
+        <li>Shipped 9+ AI/ML projects spanning finance, healthcare, education, ad tech, and developer tooling</li>
+        <li>Built Agent Fortio: conversational AI agent with LangGraph ReACT loop and 5-stage verification pipeline for portfolio intelligence</li>
+        <li>Designed LegacyLens: RAG system making 250K+ lines of LAPACK Fortran queryable, achieving >70% precision@5</li>
+        <li>Architected sub-second-latency AI video tutor with concurrent streaming pipeline (STT → LLM → TTS → Avatar)</li>
+        <li>Built multi-agent orchestration platform with visual workflow builder (React Flow), DAG execution, and real-time WebSocket monitoring</li>
+        <li>Created MCP server on Cloudflare Workers for satellite imagery access across 150+ satellites</li>
+      </ul>
+      <div class="tl-tech">
+        <span>Python</span><span>TypeScript</span><span>LangGraph</span><span>LangChain</span><span>FastAPI</span><span>Next.js</span><span>React</span><span>MCP</span><span>Claude API</span>
+      </div>
     </div>
 
     <div class="tl-item">
       <div class="tl-dot"></div>
-      <div class="tl-date">2020 — July 2025</div>
-      <div class="tl-role">Lead Software Engineer / Consultant</div>
-      <div class="tl-company">UCLA & Various · Los Angeles, CA</div>
-      <div class="tl-desc">Led engineering teams and consulted on enterprise software systems. Designed scalable architectures, drove technical strategy, and mentored junior engineers across full-stack and data-intensive projects.</div>
+      <div class="tl-date">Apr 2013 — Aug 2025</div>
+      <div class="tl-role">Senior Software Engineering Lead (Consultant)</div>
+      <div class="tl-company">University of California, Los Angeles (UCLA) · Ascend 2.0 Enterprise Platform</div>
+      <div class="tl-desc">Led architecture and delivery of enterprise-scale integrations for university-wide systems.</div>
+      <ul class="tl-bullets">
+        <li>Architected and delivered 15+ serverless microservices using AWS Lambda, Step Functions, and DynamoDB</li>
+        <li>Designed secure REST APIs through APIGEE proxy gateway with Cognito OAuth for 10+ downstream campus systems</li>
+        <li>Built automated CI/CD pipelines using AWS SAM, CodePipeline, and CodeBuild — cutting deployment from hours to minutes</li>
+        <li>Engineered file integration workflows processing sensitive financial/payroll data for 45,000+ employees</li>
+        <li>Led cross-functional requirements with 8+ stakeholder teams; managed and mentored 5+ offshore developers</li>
+      </ul>
+      <div class="tl-tech">
+        <span>AWS Lambda</span><span>Step Functions</span><span>DynamoDB</span><span>APIGEE</span><span>Python</span><span>Node.js</span><span>SAM</span><span>CI/CD</span>
+      </div>
     </div>
 
     <div class="tl-item">
       <div class="tl-dot"></div>
-      <div class="tl-date">July 2010 — 2020</div>
-      <div class="tl-role">Senior Software Engineer</div>
-      <div class="tl-company">Enterprise & Startups</div>
-      <div class="tl-desc">10 years of hands-on engineering across enterprise and startup environments. Built distributed systems, APIs, and data pipelines at scale. Grew from individual contributor to tech lead.</div>
+      <div class="tl-date">Jul 2010 — Mar 2023</div>
+      <div class="tl-role">Senior Software Developer (Consultant)</div>
+      <div class="tl-company">UCLA · Time Reporting System (UCPATH), Financial & Payroll Applications</div>
+      <div class="tl-desc">Core developer on enterprise time tracking deployed across multiple UC campuses.</div>
+      <ul class="tl-bullets">
+        <li>Built and maintained Time Reporting System deployed across 80+ departments at UCLA, UC Irvine, UC Merced, and UCOP</li>
+        <li>Designed core profile loading batch process migrating 45,000+ employee records with validation and error recovery</li>
+        <li>Developed complex hours calculation logic supporting multiple union contracts, overtime rules, and shift differentials</li>
+        <li>Configured and hardened Linux server infrastructure, reducing manual deployment effort by 80%</li>
+      </ul>
+      <div class="tl-tech">
+        <span>Java</span><span>Spring</span><span>Hibernate</span><span>React</span><span>SQL Server</span><span>REST</span><span>Linux</span>
+      </div>
     </div>
 
     <div class="tl-item">
       <div class="tl-dot"></div>
-      <div class="tl-date">2002 — 2010</div>
-      <div class="tl-role">Software Engineer</div>
-      <div class="tl-company">Early Career</div>
-      <div class="tl-desc">Foundation years — built expertise in full-stack development, database design, and production-grade system delivery. Established strong engineering fundamentals.</div>
+      <div class="tl-date">Mar 2007 — May 2010</div>
+      <div class="tl-role">Track Lead — Technical and Functional</div>
+      <div class="tl-company">Fidelity Business Services · Bangalore, India</div>
+      <div class="tl-desc">Led a 10-member cross-functional team building trading engine modules for the Insight platform.</div>
+      <ul class="tl-bullets">
+        <li>Architected core trading engine processing real-time equity and fund transactions</li>
+        <li>Led full sprint lifecycle — planning, standups, blocker resolution, and on-time delivery</li>
+        <li>Received "On the Spot" and "All Hands Recognition" awards for ahead-of-schedule delivery and leadership</li>
+      </ul>
+      <div class="tl-tech">
+        <span>Java</span><span>Spring MVC</span><span>Hibernate</span><span>JMS</span><span>Oracle</span>
+      </div>
     </div>
 
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">Mar 2006 — Mar 2007</div>
+      <div class="tl-role">FlexCube Developer</div>
+      <div class="tl-company">Oracle Financial Services (i-Flex Solutions) · Bangalore, India</div>
+      <div class="tl-desc">Built PL/SQL modules for the FLEXCUBE universal banking platform supporting core banking operations for enterprise clients across Asia and the Middle East.</div>
+      <div class="tl-tech">
+        <span>Oracle PL/SQL</span><span>Banking</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Education & Certs -->
+  <div style="margin-top:48px; display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+    <div class="skill-group">
+      <div class="skill-group-header">
+        <div class="skill-icon" style="background:var(--indigo-light);">🎓</div>
+        <h3>Education</h3>
+      </div>
+      <div style="font-size:0.9rem; color:var(--text-mid); line-height:1.7;">
+        <strong>MBA</strong> — Finance<br>
+        <strong>B.E.</strong> — Information Science & Engineering
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-header">
+        <div class="skill-icon" style="background:var(--amber-light);">🏅</div>
+        <h3>Certifications</h3>
+      </div>
+      <div class="skill-tags">
+        <span class="skill-tag">SCJP</span>
+        <span class="skill-tag">SCWCD</span>
+        <span class="skill-tag">OCA</span>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1023,7 +1133,7 @@ footer strong { color: var(--accent); font-weight: 700; }
   <p class="section-sub">Open to collaborations, consulting, and interesting conversations about AI.</p>
   <div class="contact-grid">
     <div class="contact-info">
-      <a class="contact-row" href="meghasjain15@gmail.com">
+      <a class="contact-row" href="mailto:meghasjain15@gmail.com">
         <div class="contact-row-icon">📧</div>
         meghasjain15@gmail.com
       </a>
@@ -1082,11 +1192,4 @@ function toggleTheme() {
 })();
 
 // Scroll reveal
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.1 });
-document.querySelectorAll('.anim').forEach(el => observer.observe(el));
-</script>
-
-</body>
-</html>
+const observer = 
